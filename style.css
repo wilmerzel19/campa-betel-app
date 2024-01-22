@@ -139,7 +139,7 @@ form.sign-in-form {
   outline: none;
   height: 49px;
   border-radius: 49px;
-  color: #fff;
+  color: #1a1919;
   text-transform: uppercase;
   font-weight: 600;
   margin: 10px 0;
@@ -219,7 +219,7 @@ form.sign-in-form {
 .btn.transparent {
   margin: 0;
   background: none;
-  border: 2px solid #fff;
+  border: 2px solid #27ac18;
   width: 130px;
   height: 41px;
   font-weight: 600;
