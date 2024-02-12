@@ -128,6 +128,91 @@ table {
             background-color: #eef2ef;
         }
 
+
+        .texttb {
+            text-align: center;
+            color: #268d8e;
+            font-size: 30px;
+
+        }
+
+        button {
+            display: inline-block;
+            background-color: #22a719;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+
+        }
+
+        .btneditar {
+            background-color: #8f42e7;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+
+        }
+
+        .btneliminar {
+            background-color: #e74242;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+
+        }
+
+        .btnguardar {
+            background-color: #22a719;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+
+        }
+
+        .btncerrar {
+            background-color: #e74242;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+
+        }
+
+        .btncrear {
+            display: inline;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #4c524b;
+            color: #fff;
+
+            font-size: 20px;
+            margin-left: 10px;
+
+
+        }
+
+        .btnpuntos {
+            background-color: #147625;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+
+        }
+
     </style>
 </head>
 
@@ -168,6 +253,8 @@ table {
                 <label for="Dramas">Dramas:</label>
                 <input type="number" id="Dramas" name="Dramas" placeholder="Dramas" required><br><br>
                 <label for="versiculos">versiculos:</label>
+
+
                 <input type="number" id="versiculos" name="versiculos" placeholder="versiculos" required><br><br>
                 <button class="btnguardar" type="button" onclick="guardar()">Guardar</button>
                 <button class="btncerrar" type="button" onclick="closeModal()">Cerrar</button>
@@ -176,6 +263,9 @@ table {
         </div>
     </div>
 
+
+            
+           
 
     <div class="container">
         <h2 class="texttb">Tabla de Equipos</h2>
@@ -192,10 +282,13 @@ table {
                     <th>Esgrima</th>
                     <th>Dramas</th>
                     <th>Versiculos</th>
+                    <th>total</th>
                     <th>Acciones</th>
                 </tr>
         </thead>
-        <tbody id="teams"></tbody>
+        <tbody id="tablaB">
+            
+        </tbody>
         </table>
     </div>
 
@@ -238,6 +331,8 @@ table {
             const Esgrima = document.getElementById('Esgrima').value;
             const Dramas = document.getElementById('Dramas').value;
             const versiculos = document.getElementById('versiculos').value;
+            const Total = `${Filas + cantos + Deportes + Esgrima + Dramas + versiculos}`;
+
 
             const team = {
                 name,
@@ -247,7 +342,9 @@ table {
                 Deportes,
                 Esgrima,
                 Dramas,
-                versiculos
+                versiculos,
+                Total
+
             }
 
             let teams = JSON.parse(localStorage.getItem('teams')) || [];
@@ -258,7 +355,7 @@ table {
 
         const cargar = () => {
             let teams = JSON.parse(localStorage.getItem("teams"));
-            let tabla = document.getElementById("myTable");
+            let tabla = document.getElementById("tablaB");
             var html = "";
             teams.map((team, index) => {
                 html += `<tr>
@@ -272,6 +369,7 @@ table {
                 <td>${team.Esgrima}</td>
                 <td>${team.Dramas}</td>
                 <td>${team.versiculos}</td>
+                <td>${team.Total}</td>
                 <td>
                     <button class="btneditar" onclick="editar1('${team.name}','${team.color}',${index})">Editar</button>
                     <button class="btneliminar" onclick="eliminar(${index})">Eliminar</button>
@@ -281,8 +379,41 @@ table {
             });
             tabla.innerHTML = html;
         }
-
+               
         cargar();
+
+        const closeModal = () => {
+            modal.style.display = "none";
+            document.getElementById('name').value = '';
+            document.getElementById('color').value = '';
+            document.getElementById('Filas').value = '';
+            document.getElementById('cantos').value = '';
+            document.getElementById('Deportes').value = '';
+            document.getElementById('Esgrima').value = '';
+            document.getElementById('Dramas').value = '';
+            document.getElementById('versiculos').value = '';
+        }
+
+
+        const total = (index) => {
+            let teams = JSON.parse(localStorage.getItem("teams"));
+            let team = teams[index];
+            localStorage.setItem("team", JSON.stringify(team));
+            window.location.href = "Puntos.html";
+        }
+
+    
+
+        const eliminar = (index) => {
+            let teams = JSON.parse(localStorage.getItem("teams"));
+            teams.splice(index, 1);
+            localStorage.setItem("teams", JSON.stringify(teams));
+            cargar();
+        }
+
+   
+     
+
 
 
 
