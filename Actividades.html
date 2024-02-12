@@ -237,6 +237,7 @@
                 <input type="color" id="color" name="color" placeholder="Color" required><br><br>
                 <button class="btnguardar" type="button" onclick="guardar()">Guardar</button>
                 <button class="btncerrar" type="button" onclick="closeModal()">Cerrar</button>
+
             
         </div>
     </div>
@@ -312,13 +313,30 @@
                 <td>
                     <button class="btneditar" onclick="editar1('${team.name}','${team.color}',${index})">Editar</button>
                     <button class="btneliminar" onclick="eliminar(${index})">Eliminar</button>
-                    <button class="btnpuntos" onclick="eliminar(${index})">Puntos</button> 
+                    <button class="btnpuntos" onclick="puntos(${index})">Puntos</button> 
                     
                 </td>
             </tr>`;
             });
             tabla.innerHTML = html;
         }
+
+        const puntos = (index) => {
+            let teams = JSON.parse(localStorage.getItem("actividades"));
+            let team = teams[index];
+            localStorage.setItem("team", JSON.stringify(team));
+            window.location.href = "Puntos.html";
+        }
+
+
+
+
+
+
+
+
+
+
         const eliminar = (index) => {
             let teams = JSON.parse(localStorage.getItem("actividades"));
             teams.splice(index, 1);
