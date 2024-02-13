@@ -230,7 +230,6 @@ table {
 
     </nav>
 
-    <h1>Actividades</h1>
 
     <!-- Modal -->
     <div id="myModal" class="modal">
@@ -334,6 +333,8 @@ table {
             const Total = `${Filas + cantos + Deportes + Esgrima + Dramas + versiculos}`;
 
 
+
+
             const team = {
                 name,
                 color,
@@ -343,7 +344,8 @@ table {
                 Esgrima,
                 Dramas,
                 versiculos,
-                Total
+                Total 
+
 
             }
 
@@ -412,8 +414,16 @@ table {
         }
 
    
-     
+        const sumar = (index) => {
+            let teams = JSON.parse(localStorage.getItem("teams"));
+            let team = teams[index];
+            let total = team.Filas + team.cantos + team.Deportes + team.Esgrima + team.Dramas + team.versiculos;
+            return total;
+        }
 
+
+
+    
 
 
 
